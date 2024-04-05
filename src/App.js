@@ -30,13 +30,17 @@ const App = ({ initialDate, calendarData }) => {
       });
   };
   return (
-    <div className="container mx-auto">
-      <h1 className="text-3xl font-bold my-6">Weekly Todo List</h1>
-      <EventCalendar
-        initialDate="2024-04-01"
-        task={task}
-        onTaskDelete={handleTaskDelete}
-      />
+    <div className=" flex justify-center items-center h-full">
+      <div>
+        <h1 className="text-3xl font-bold my-6  text-center">
+          Weekly Todo List
+        </h1>
+        <EventCalendar
+          initialDate="2024-04-01"
+          task={task}
+          onTaskDelete={handleTaskDelete}
+        />
+      </div>
     </div>
   );
 };

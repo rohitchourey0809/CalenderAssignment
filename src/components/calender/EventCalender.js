@@ -95,10 +95,20 @@ const EventCalendar = ({ initialDate }) => {
 
   return (
     <div className="flex flex-col items-center gap-4">
-      <div className="flex justify-center gap-4">
-        <button onClick={handlePrevWeek}>Previous Week</button>
-        <h2>{startDate.format("MMMM YYYY")}</h2>
-        <button onClick={handleNextWeek}>Next Week</button>
+      <div className="flex items-center justify-center gap-4 border-b-2 pb-4 mb-4">
+        <button
+          onClick={handlePrevWeek}
+          className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded"
+        >
+          Previous Week
+        </button>
+        <h2 className="text-xl font-bold">{startDate.format("MMMM YYYY")}</h2>
+        <button
+          onClick={handleNextWeek}
+          className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-9 rounded"
+        >
+          Next Week
+        </button>
       </div>
       <div className="flex flex-wrap justify-center align-center gap-4">
         {currentWeek.map((day) => (
