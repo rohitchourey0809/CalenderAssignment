@@ -67,16 +67,24 @@ const EventCalendar = ({ initialDate }) => {
       });
   };
 
-  const handleDeleteTask = (taskId) => {
-    axios
-      .delete(`http://localhost:3001/tasks/${taskId}`)
-      .then(() => {
-        fetchTasks(selectedDate);
-      })
-      .catch((error) => {
-        console.error("Error deleting task:", error);
-      });
-  };
+ const handleDeleteTask = (taskId) => {
+   axios
+     .delete(`http://localhost:3001/tasks/${taskId}`)
+     .then(() => {
+       const updatedTasks = { ...tasks };
+       const weekStartDate = moment(selectedDate)
+         .startOf("week")
+         .format("YYYY-MM-DD");
+       updatedTasks[weekStartDate] = updatedTasks[weekStartDate].filter(
+         (task) => task.id !== taskId
+       );
+       setTasks(updatedTasks);
+     })
+     .catch((error) => {
+       console.error("Error deleting task:", error);
+     });
+ };
+
 
   const handlePrevWeek = () => {
     setSelectedDate(moment(selectedDate).subtract(1, "week"));
