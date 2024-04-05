@@ -1,25 +1,44 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import EventCalendar from "./components/calender/EventCalender";
 
-function App() {
+const App = ({ initialDate, calendarData }) => {
+  const [task, setTasks] = useState([]);
+
+  useEffect(() => {
+    // Fetch tasks from the backend API
+    axios
+      .get("http://localhost:3001/tasks")
+      .then((response) => {
+        setTasks(response.data);
+      })
+      .catch((error) => {
+        console.error("Error fetching tasks:", error);
+      });
+  }, []);
+
+  const handleTaskDelete = (taskId) => {
+    // Delete task from the backend
+    axios
+      .delete(`http://localhost:3001/tasks/${taskId}`)
+      .then(() => {
+        // Update tasks state after successful deletion
+        setTasks(task.filter((task) => task.id !== taskId));
+      })
+      .catch((error) => {
+        console.error("Error deleting task:", error);
+      });
+  };
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="container mx-auto">
+      <h1 className="text-3xl font-bold my-6">Weekly Todo List</h1>
+      <EventCalendar
+        initialDate="2024-04-01"
+        task={task}
+        onTaskDelete={handleTaskDelete}
+      />
     </div>
   );
-}
+};
 
 export default App;
