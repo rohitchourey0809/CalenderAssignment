@@ -10,7 +10,7 @@ for Running json-server
 [Click here to watch the video](https://www.flexclip.com/share/1512640c2abad683cdb077270ff548c5ac2533b.html)
 
 
-[![Click here to watch the video](https://i.stack.imgur.com/Vp2cE.png)](https://drive.google.com/file/d/191QHHQ7zDuJNKAQ3fdOk2esVlei1VSl8/view?usp=direct)
+[![Click here to watch the video](https://miro.medium.com/v2/resize:fit:828/format:webp/1*9gK-r3wqrG1c6WzwYd8XfA.png)](https://drive.google.com/file/d/191QHHQ7zDuJNKAQ3fdOk2esVlei1VSl8/view?usp=direct)
 
 
 [![Watch the video](https://i.stack.imgur.com/Vp2cE.png)](https://youtu.be/vt5fpE0bzSY)
