@@ -5,6 +5,8 @@ for Running json-server
 
 2) npm start
 
+# json-server --watch db.json --host 192.168.127.29 --port 3001
+
 <iframe width="560" height="315" src="https://www.flexclip.com/share/1512640c2abad683cdb077270ff548c5ac2533b.html" frameborder="0" allowfullscreen></iframe>
 
 [Click here to watch the video](https://www.flexclip.com/share/1512640c2abad683cdb077270ff548c5ac2533b.html)
