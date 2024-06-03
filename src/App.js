@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import EventCalendar from "./components/calender/EventCalender";
+import { baseurl } from "./api";
 
 const App = ({ initialDate, calendarData }) => {
   const [task, setTasks] = useState([]);
@@ -8,7 +9,7 @@ const App = ({ initialDate, calendarData }) => {
   useEffect(() => {
     // Fetch tasks from the backend API
     axios
-      .get("http://localhost:3001/tasks")
+      .get(`${baseurl}/tasks`)
       .then((response) => {
         setTasks(response.data);
       })
@@ -20,7 +21,7 @@ const App = ({ initialDate, calendarData }) => {
   const handleTaskDelete = (taskId) => {
     // Delete task from the backend
     axios
-      .delete(`http://localhost:3001/tasks/${taskId}`)
+      .delete(`${baseurl}/tasks/${taskId}`)
       .then(() => {
         // Update tasks state after successful deletion
         setTasks(task.filter((task) => task.id !== taskId));

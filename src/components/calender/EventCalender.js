@@ -2,6 +2,7 @@ import React, { useState, useEffect, useCallback } from "react";
 import moment from "moment";
 import axios from "axios";
 import { CheckIcon } from "@heroicons/react/outline"; // Import the tick mark icon from Heroicons
+import { baseurl } from "../../api";
 
 const EventCalendar = ({ initialDate }) => {
   const [selectedDate, setSelectedDate] = useState(initialDate);
@@ -13,7 +14,7 @@ const EventCalendar = ({ initialDate }) => {
       const startDate = moment(date).startOf("week").format("YYYY-MM-DD");
       if (!tasks[startDate]) {
         axios
-          .get(`http://localhost:3001/tasks?start_date=${startDate}`)
+          .get(`${baseurl}/tasks?start_date=${startDate}`)
           .then((response) => {
             setTasks((prevTasks) => ({
               ...prevTasks,
@@ -49,7 +50,7 @@ const EventCalendar = ({ initialDate }) => {
       date: selectedDate,
     };
     axios
-      .post("http://localhost:3001/tasks", taskData)
+      .post(`${baseurl}/tasks`, taskData)
       .then((response) => {
         setNewTask("");
         setIsModalOpen(false);
@@ -67,24 +68,23 @@ const EventCalendar = ({ initialDate }) => {
       });
   };
 
- const handleDeleteTask = (taskId) => {
-   axios
-     .delete(`http://localhost:3001/tasks/${taskId}`)
-     .then(() => {
-       const updatedTasks = { ...tasks };
-       const weekStartDate = moment(selectedDate)
-         .startOf("week")
-         .format("YYYY-MM-DD");
-       updatedTasks[weekStartDate] = updatedTasks[weekStartDate].filter(
-         (task) => task.id !== taskId
-       );
-       setTasks(updatedTasks);
-     })
-     .catch((error) => {
-       console.error("Error deleting task:", error);
-     });
- };
-
+  const handleDeleteTask = (taskId) => {
+    axios
+      .delete(`${baseurl}/tasks/${taskId}`)
+      .then(() => {
+        const updatedTasks = { ...tasks };
+        const weekStartDate = moment(selectedDate)
+          .startOf("week")
+          .format("YYYY-MM-DD");
+        updatedTasks[weekStartDate] = updatedTasks[weekStartDate].filter(
+          (task) => task._id !== taskId
+        );
+        setTasks(updatedTasks);
+      })
+      .catch((error) => {
+        console.error("Error deleting task:", error);
+      });
+  };
 
   const handlePrevWeek = () => {
     setSelectedDate(moment(selectedDate).subtract(1, "week"));
@@ -166,7 +166,7 @@ const EventCalendar = ({ initialDate }) => {
                         {task.title}
                       </span>
                       <button
-                        onClick={() => handleDeleteTask(task.id)}
+                        onClick={() => handleDeleteTask(task._id)}
                         className="text-red-500 bg-transparent border border-solid border-red-500 rounded px-3 py-1 transition duration-300 ease-in-out hover:bg-red-500 hover:text-white"
                       >
                         Delete
